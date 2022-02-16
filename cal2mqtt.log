@@ -1,0 +1,18 @@
+
+2022-02-16 14:56:06,423 INFO: cal2mqtt Started..... 
+2022-02-16 14:56:06,494 INFO: MQTT connected: localhost:1883
+2022-02-16 14:56:07,652 INFO: Path valid ICS: abfuhr.ics
+2022-02-16 14:56:16,772 INFO: MQTT Published for: Biotonne
+2022-02-16 14:56:17,109 INFO: MQTT Published for: Restmülltonne
+2022-02-16 14:56:22,316 INFO: MQTT Published for: Biotonne
+2022-02-16 14:56:22,726 INFO: MQTT Published for: Restmülltonne
+2022-02-16 14:56:30,821 INFO: MQTT Published for: Biotonne
+2022-02-16 14:56:31,926 INFO: MQTT Published for: Restmülltonne
+2022-02-16 14:56:32,636 INFO: MQTT Published for: Biotonne
+2022-02-16 14:56:33,259 INFO: MQTT Published for: Restmülltonne
+2022-02-16 14:56:33,910 INFO: MQTT Published for: Biotonne
+2022-02-16 14:56:34,499 INFO: MQTT Published for: Restmülltonne
+2022-02-16 14:56:34,985 INFO: MQTT Published for: Biotonne
+2022-02-16 14:56:35,474 INFO: MQTT Published for: Restmülltonne
+2022-02-16 14:56:36,034 INFO: MQTT Published for: Biotonne
+2022-02-16 14:56:36,545 INFO: MQTT Published for: Restmülltonne
