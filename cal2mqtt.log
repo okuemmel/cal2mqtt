@@ -16,3 +16,6 @@
 2022-02-16 14:56:35,474 INFO: MQTT Published for: Restmülltonne
 2022-02-16 14:56:36,034 INFO: MQTT Published for: Biotonne
 2022-02-16 14:56:36,545 INFO: MQTT Published for: Restmülltonne
+2022-02-16 17:17:02,421 INFO: cal2mqtt Started..... 
+2022-02-16 17:17:02,456 ERROR: Path not valid ICS: /abfuhr.ics
+2022-02-16 17:17:02,456 INFO: MQTT connected: 192.168.1.136:1883

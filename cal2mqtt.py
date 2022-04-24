@@ -8,12 +8,23 @@ import time
 import paho.mqtt.client as mqtt
 import logging
 from logging.handlers  import RotatingFileHandler
+import sys
+import os
+from argparse import ArgumentParser
+parser = ArgumentParser()
 
-TOPIC = "trash/"
-BROKER_ADDRESS = "localhost"
+
+parser.add_argument("-m", "--mode",dest="mode", default="listen")
+parser.add_argument("-e", "--event",dest="event", default="none")
+args =parser.parse_args
+print(args)
+TOPIC = "trash"
+BROKER_ADDRESS = "192.168.1.136"
 PORT = 1883
-PFAD="abfuhr.ics"
 
+
+scriptpath = os.path.dirname(sys.argv[0])
+PFAD=scriptpath + "/abfuhr.ics"
 #----------------------------------------------------------------------
 
 """
@@ -23,7 +34,7 @@ logger = logging.getLogger("Rotating Log")
 logger.setLevel(logging.DEBUG)
 
     # add a rotating handler
-handler = RotatingFileHandler("cal2mqtt.log", maxBytes=999999,
+handler = RotatingFileHandler(scriptpath+ "cal2mqtt.log", maxBytes=999999,
                                 backupCount=1)
 formatter = logging.Formatter("%(asctime)s %(levelname)s: %(message)s")
 handler.setFormatter(formatter)
@@ -61,8 +72,7 @@ def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Verbindung akzeptiert")
         logger.info("MQTT connected: " + BROKER_ADDRESS +":"+ str(PORT) )
-
-        client.subscribe(TOPIC+"#")
+        client.subscribe(TOPIC+"/#")
     elif rc == 1:
         print("Falsche Protokollversion")
         logger.error("MQTT not connected: Falsche Protokollversion  " + BROKER_ADDRESS +":"+ str(PORT) )
@@ -111,8 +121,14 @@ def first_event(name):
                         termin= component['DTSTART'].dt
     tage=int( np.ceil((termin - now).days +   ((termin - now).seconds)/(60*60*24) ) )
     g.close()
-    client.publish(TOPIC + name + "/date" , (termin.strftime("%d.%m.%Y")))
-    client.publish(TOPIC + name + "/remDays",str(tage))
+    if tage != 400:
+        client.publish(TOPIC + "/" + name + "/date" , (termin.strftime("%d.%m.%Y")))
+        client.publish(TOPIC + "/"+ name + "/remDays",str(tage))
+        client.publish(TOPIC + "/"+ name + "/result","ok")
+    else:
+        client.publish(TOPIC + "/" + name + "/date" , "Error")
+        client.publish(TOPIC + "/"+ name + "/remDays","Error")
+        client.publish(TOPIC + "/"+ name + "/result", "nok")
     logger.info("MQTT Published for: " + name )
     return termin,tage
 
